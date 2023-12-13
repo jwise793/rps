@@ -1,93 +1,433 @@
 // Rock Paper Scissors game.
 
-let rps = ["rock", "paper", "scissors"];
-let ply_choice;
-let cmp_choice;
-let ply_wins = 0;
-let cmp_wins = 0;
-let draws = 0;
-let game_num = 0;
-let pChoice;
-let game_over = false;
-let name;
+const rps = ['paper', 'scissors', 'rock']
+
+
+const rock = document.getElementById('rock');
+const paper = document.getElementById('paper');
+const scissors = document.getElementById('scissors');
+const taskContainer = document.getElementById('bx');
+const tc = document.getElementById('px');
+const stuff = document.querySelectorAll('div#box')
+const element = document.getElementsByClassName('box');
+const can = document.getElementsByClassName('can');
+
+const yup = document.getElementById('n');
+const pal = document.getElementById('dud');
+const v = document.getElementById('ai');
+const con = document.getElementById('bye');
+const cn = document.getElementById('by');
+const h = document.getElementById('here');
+const got = document.getElementsByClassName('got');
+const reload = document.getElementById('here');
+
+
+
+let rck = false;
+let ppr = false;
+let scrs = false;
+
+let ply = 0;
+let hal = 0;
+let cmp = '';
+
+let games = 0;
+
+let arr = [];
+let g = [];
+let f = [];
+let pl = [];
 
 // function for computer choice.
 function getComputerChoice(){
     let ai_choice = rps[Math.floor(Math.random() * rps.length)];
-    cmp_choice = ai_choice
+    
+    return ai_choice;
 }
+
 
 // function for player choice.
-function playerChoice(){
-    let pChoice = prompt("rock paper scissors")
+function player() {
+    rock.addEventListener('click', function(){
+        
+        
+            let r = document.createElement('p');
+            r.classList.add('box')
+            r.innerText = 'rock';
+            taskContainer.appendChild(r)
+            f.push('rock')
+            console.log(`before ${pal.children.length}`)
 
-    if (pChoice === null) {
-        game_over = true;
-        return; }
-    if (pChoice == "rock"|| pChoice == "paper" || pChoice == "scissors") {
-        return ply_choice = pChoice;}
+            
+            
+            
+            
+            console.log(`before ${pal.children.length}`)
+           
+            
+            let b = document.createElement('p');
+            b.classList.add('can');
+            b.innerText = getComputerChoice();
+            tc.appendChild(b);
+            
+            g.push(b.innerText);
 
-    else if (pChoice == "") {
-        alert("Enter a choice!");
-        return playerChoice()}
+            arr.push(1);
+            if(pal.children.length >= 1){
+                pal.removeChild(pal.firstChild)
+                v.removeChild(v.firstChild)
+                
+            }
 
-    else if (pChoice != "rock"|| pChoice != "paper"|| pChoice != "scissors") {
-        alert("Not an option!");
-        return playerChoice() }   
-}
+            
+            
+            
+            if(f.includes('rock') && g.includes('scissors')){
+                r.style.color = 'white';
+                r.style.backgroundColor = 'green';
+                b.style.color = 'white';
+                b.style.backgroundColor = 'red';
+                
+                ply += 1;
+                hal += 0;
+                let rs = document.createElement('p');
+                rs.classList.add('gui');
+                rs.innerText = ply;
+                pal.appendChild(rs)
+
+                let bs = document.createElement('p');
+                bs.classList.add('gui');
+                bs.innerText = hal;
+                v.appendChild(bs);
+                
+            } 
+            if (f.includes('rock') && g.includes('rock')){
+                r.style.backgroundColor = 'grey';
+                r.style.color = 'white';
+                b.style.backgroundColor = 'grey';
+                b.style.color = 'white';
+                let rs = document.createElement('p');
+                rs.classList.add('gui');
+                rs.innerText = ply;
+                pal.appendChild(rs)
+
+                let bs = document.createElement('p');
+                bs.classList.add('gui');
+                bs.innerText = hal;
+                v.appendChild(bs);
+                
+            } 
+            if (f.includes('rock') && g.includes('paper')) {
+                r.style.color = 'white';
+                b.style.color = 'white';
+                r.style.backgroundColor = 'red';
+                b.style.backgroundColor = 'green';
+                hal += 1;
+                ply += 0;
+                let bs = document.createElement('p');
+                bs.classList.add('gui');
+                bs.innerText = hal;
+                v.appendChild(bs);
+                let rs = document.createElement('p');
+                rs.classList.add('gui');
+            
+                rs.innerText = ply;
+                pal.appendChild(rs)
+
+            }
+            
+            console.log('player', f)
+            console.log('computer', g)
+            g.pop()
+            f.pop()
+            console.log('poop ',hal);
+
+            if(ply == 5){
+                con.remove();
+                cn.remove();
+                let over = document.createElement('div');
+                over.classList.add('go');
+                h.appendChild(over)
+                let win = document.createElement('h1');
+                win.style.color = 'green';
+                win.innerText = 'Player Wins!!!!';
+                over.appendChild(win);
+            }
+            if(hal == 5){
+                con.remove();
+                cn.remove();
+                let over = document.createElement('div');
+                over.classList.add('go');
+                h.appendChild(over)
+                let win = document.createElement('h1');
+                win.style.color = 'green';
+                win.innerText = 'Computer Wins!!!!';
+                over.appendChild(win);
+
+            }
+
+            if(ply == 5 || hal == 5){
+                let again = document.createElement('button');
+                again.classList.add('go')
+                again.setAttribute('id','new')
+                again.innerText = 'play again';
+                h.appendChild(again)
+                reload.addEventListener('click', function(){
+                    location.reload()
+                })
+            }
+
+    })
+    paper.addEventListener('click', function(){
+       
+        
+        let p = document.createElement('p');
+        p.classList.add('box')
+        p.innerText = 'paper';
+        taskContainer.appendChild(p)
+        f.push('paper')
+
+        let b = document.createElement('p');
+        b.classList.add('can');
+        b.innerText = getComputerChoice();
+        tc.appendChild(b);
+        g.push(b.innerText);
+
+        if(pal.children.length >= 1){
+            pal.removeChild(pal.firstChild)
+            v.removeChild(v.firstChild)
+        }
+
+        
+
+        
+
+        arr.push(1);
+        console.log(f)
+
+        if(f.includes('paper') && g.includes('rock')){
+            p.style.color = 'white';
+            p.style.backgroundColor = 'green';
+            b.style.color = 'white';
+            b.style.backgroundColor = 'red';
+            ply += 1;
+            hal += 0;
+            let rs = document.createElement('p');
+            rs.classList.add('gui');
+            rs.innerText = ply;
+            pal.appendChild(rs)
+
+            let bs = document.createElement('p');
+            bs.classList.add('gui');
+            bs.innerText = hal;
+            v.appendChild(bs);
+
+        } else if (f.includes('paper') && g.includes('paper')){
+            p.style.backgroundColor = 'grey';
+            p.style.color = 'white';
+            b.style.backgroundColor = 'grey';
+            b.style.color = 'white';
+            let rs = document.createElement('p');
+            rs.classList.add('gui');
+            rs.innerText = ply;
+            pal.appendChild(rs)
+
+            let bs = document.createElement('p');
+            bs.classList.add('gui');
+            bs.innerText = hal;
+            v.appendChild(bs);
+                
+        } else if (f.includes('paper') && g.includes('scissors')) {
+            p.style.color = 'white';
+            b.style.color = 'white';
+            p.style.backgroundColor = 'red';
+            b.style.backgroundColor = 'green';
+            hal += 1;
+            ply += 0;
+
+            let bs = document.createElement('p');
+            bs.classList.add('gui');
+            bs.innerText = hal;
+            v.appendChild(bs);
+
+            let rs = document.createElement('p');
+            rs.classList.add('gui');    
+            rs.innerText = ply;
+            pal.appendChild(rs)
+            }
+
+        g.pop()
+        f.pop()
+        if(ply == 5){
+            con.remove();
+            cn.remove();
+            let over = document.createElement('div');
+            over.classList.add('go');
+            h.appendChild(over)
+            let win = document.createElement('h1');
+            win.style.color = 'green';
+            win.innerText = 'Player Wins!!!!';
+            over.appendChild(win);
+        }
+        if(hal == 5){
+            con.remove();
+            cn.remove();
+            let over = document.createElement('div');
+            over.classList.add('go');
+            h.appendChild(over)
+            let win = document.createElement('h1');
+            win.style.color = 'green';
+            win.innerText = 'Computer Wins!!!!';
+            over.appendChild(win);
+
+        }
+        if(ply == 5 || hal == 5){
+            let again = document.createElement('button');
+            again.classList.add('go')
+            again.setAttribute('id','new')
+            again.innerText = 'play again';
+            h.appendChild(again)
+            reload.addEventListener('click', function(){
+                location.reload()
+            })
+        }
+
+
+            
+    })
+    
+    scissors.addEventListener('click', function(){
+        
+        
+            let s = document.createElement('p');
+            s.classList.add('box')
+            s.innerText = 'scissors';
+            taskContainer.appendChild(s)
+            f.push('scissors')
+
+            let b = document.createElement('p');
+            b.classList.add('can');
+            b.innerText = getComputerChoice();
+            tc.appendChild(b);
+            g.push(b.innerText);
+
+
+            if(pal.children.length >= 1){
+                pal.removeChild(pal.firstChild)
+                v.removeChild(v.firstChild)
+            }
+
+            
+
+            arr.push(1);
+            
+
+            if(f.includes('scissors') && g.includes('paper')){
+                s.style.color = 'white';
+                s.style.backgroundColor = 'green';
+                b.style.color = 'white';
+                b.style.backgroundColor = 'red';
+                ply += 1;
+                hal += 0;
+                let rs = document.createElement('p');
+                rs.classList.add('gui');
+                rs.innerText = ply;
+                pal.appendChild(rs)
+
+                let bs = document.createElement('p');
+                bs.classList.add('gui');
+                bs.innerText = hal;
+                v.appendChild(bs);
+                
+            } else if (f.includes('scissors') && g.includes('scissors')){
+                s.style.backgroundColor = 'grey';
+                s.style.color = 'white';
+                b.style.backgroundColor = 'grey';
+                b.style.color = 'white';
+                let rs = document.createElement('p');
+                rs.classList.add('gui');
+                rs.innerText = ply;
+                pal.appendChild(rs)
+
+                let bs = document.createElement('p');
+                bs.classList.add('gui');
+                bs.innerText = hal;
+                v.appendChild(bs);
+                
+            } else if (f.includes('scissors') && g.includes('rock')){
+                s.style.color = 'white';
+                b.style.color = 'white';
+                s.style.backgroundColor = 'red';
+                b.style.backgroundColor = 'green';
+                hal += 1;
+                ply += 0;
+                let bs = document.createElement('p');
+                bs.classList.add('gui');
+                bs.innerText = hal;
+                v.appendChild(bs);
+                let rs = document.createElement('p');
+                rs.classList.add('gui');
+            
+                rs.innerText = ply;
+                pal.appendChild(rs)
+            }
+
+            
+            g.pop()
+            f.pop()
+            if(ply == 5){
+                con.remove();
+                cn.remove();
+                let over = document.createElement('div');
+                over.classList.add('go');
+                h.appendChild(over)
+                let win = document.createElement('h1');
+                win.style.color = 'green';
+                win.innerText = 'Player Wins!!!!';
+                over.appendChild(win);
+            }
+            if(hal == 5){
+                con.remove();
+                cn.remove();
+                let over = document.createElement('div');
+                over.classList.add('go');
+                h.appendChild(over)
+                let win = document.createElement('h1');
+                win.style.color = 'green';
+                win.innerText = 'Computer Wins!!!!';
+                over.appendChild(win);
+
+            }
+
+            if(ply == 5 || hal == 5){
+                let again = document.createElement('button');
+                again.classList.add('go')
+                again.setAttribute('id','new')
+                again.innerText = 'play again';
+                h.appendChild(again)
+                reload.addEventListener('click', function(){
+                    location.reload()
+                })
+            }
+
+            
+    })
+    
+    }
+
 
 // funtion for round.
-function playround() {
-    
-    playerChoice()
+
+function round(){
     getComputerChoice()
+    player()
     
-    if (ply_choice == "rock" && cmp_choice == "scissors" || ply_choice == "paper" && cmp_choice == "rock" || ply_choice == "scissors" && cmp_choice == "paper") {
-        console.log({ply_choice}," beats", {cmp_choice})
-        console.log("Player Wins \n")
-        ply_wins = ply_wins += 1; 
-        game_num = game_num += 1;}
-
-    else if (cmp_choice == "rock" && ply_choice == "scissors" || cmp_choice == "paper" && ply_choice == "rock" || cmp_choice == "scissors" && ply_choice == "paper") {
-        console.log({cmp_choice}," beats", {ply_choice})
-        console.log("Computer Wins \n")
-        cmp_wins = cmp_wins += 1; 
-        game_num = game_num += 1;}
-
-    else if (ply_choice == cmp_choice) {
-        console.log({cmp_choice}," draws", {ply_choice})
-        console.log("It's a Draw! \n")
-        game_num = game_num += 1;
-        draws += 1}}
+    
+}
 
 // function for game.
 function game() {
-    let name = prompt("Enter your name?")
-    while (game_num < 5) {
-        if (game_over === true) {
-            return;}
+    round()
+}
 
-        playround()
-        
-        alert(`${name} = ${ply_choice}\nComputer = ${cmp_choice}\nGame = ${game_num}\n${name} ${ply_wins}-Wins\nComputer ${cmp_wins}-Wins\nDraws ${draws}-Draws`)
-        console.log("Games = ", game_num)
-        console.log("Player = ", ply_wins)
-        console.log("Computer = ", cmp_wins)
-        console.log("Computer's choice", cmp_choice)
-        if (game_num == 5) {
-            if  (ply_wins > cmp_wins && game_num == 5) {
-                alert(`${name} Wins!`)}
-
-            if (cmp_wins > ply_wins && game_num == 5) {
-                alert("Computer Wins!")}
-
-            if (cmp_wins == ply_wins && game_num == 5) {
-                alert("Draw")}
-            
-            
-            }
-
-        }
-    }
-
-console.log(game())
+game()
